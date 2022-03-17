@@ -9,7 +9,6 @@
 </head>
 <body>
 <form action="{{ route("login") }}" method="post">
-    @method("post")
     @csrf
 
     <label>

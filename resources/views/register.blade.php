@@ -9,7 +9,6 @@
 </head>
 <body>
 <form action="{{ route("register") }}" method="post">
-    @method("post")
     @csrf
 
     <label>
