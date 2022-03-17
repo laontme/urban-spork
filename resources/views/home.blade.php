@@ -8,7 +8,8 @@
     <title>Document</title>
 </head>
 <body>
-<a href="{{ route("login.form") }}">Login</a>
 <a href="{{ route("register.form") }}">Register</a>
+<a href="{{ route("login.form") }}">Login</a>
+<a href="{{ route("user-logout") }}">Logout</a>
 </body>
 </html>

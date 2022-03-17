@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -15,20 +16,16 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::view("/", "home")->name("home");
 
-Route::name("login.form")->get("/login", "App\\Http\\Controllers\\LoginController@form");
-Route::name("login")->post("/login", "App\\Http\\Controllers\\LoginController@login");
+Route::view("/login", "login")->name("login.form");
+Route::view("/register", "register")->name("register.form");
 
-Route::name("register.form")->get("/register", "App\\Http\\Controllers\\RegisterController@form");
-Route::name("register")->post("/register", "App\\Http\\Controllers\\RegisterController@register");
+Route::post("/login", [UserController::class, "login"])->name("login");
+Route::post("/register", [UserController::class, "register"])->name("register");
 
-Route::middleware("auth")->name("user")->get("/user", "App\\Http\\Controllers\\UserController@show");
+Route::middleware("auth")->group(function () {
+    Route::get("/user", [UserController::class, "show"])->name("user-show");
+    Route::get("/logout", [UserController::class, "logout"])->name("user-logout");
 
-Route::get("/logout", function (Request $request) {
-    Auth::logout();
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
 });
