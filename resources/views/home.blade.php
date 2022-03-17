@@ -11,5 +11,11 @@
 <a href="{{ route("register.form") }}">Register</a>
 <a href="{{ route("login.form") }}">Login</a>
 <a href="{{ route("user-logout") }}">Logout</a>
+<br>
+@if(Auth::check())
+    Вы вошли как <b>{{\Illuminate\Support\Facades\Auth::user()->name}}</b>
+@else
+    Вы не вошли
+@endif
 </body>
 </html>
