@@ -14,7 +14,7 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request)
     {
-        if (Auth::attempt($request->safe()->all())) {
+        if (Auth::attempt($request->validated())) {
             $request->session()->regenerate();
 
             return redirect()->intended("user");
